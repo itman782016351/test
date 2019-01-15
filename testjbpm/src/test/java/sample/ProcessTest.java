@@ -1,4 +1,4 @@
-package com.sample;
+package sample;
 
 import org.jbpm.test.JbpmJUnitBaseTestCase;
 import org.junit.Test;

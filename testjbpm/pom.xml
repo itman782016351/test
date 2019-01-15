@@ -12,11 +12,11 @@
     <artifactId>testjbpm</artifactId>
 <dependencies>
     <!-- https://mvnrepository.com/artifact/org.jbpm/jbpm-flow -->
-    <dependency>
+    <!--<dependency>
         <groupId>org.jbpm</groupId>
         <artifactId>jbpm-flow</artifactId>
         <version>6.3.0.Final</version>
-    </dependency>
+    </dependency>-->
 
 </dependencies>
 
