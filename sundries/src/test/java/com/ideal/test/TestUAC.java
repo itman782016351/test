@@ -1,4 +1,3 @@
-/*
 package com.ideal.test;
 
 import java.io.BufferedReader;
@@ -131,4 +130,3 @@ public class TestUAC {
 		}
 	
 }
-*/
