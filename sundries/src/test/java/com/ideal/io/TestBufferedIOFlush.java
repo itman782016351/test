@@ -1,9 +1,9 @@
 package com.ideal.io;
 
 import org.junit.Test;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
-import java.io.File;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -68,5 +68,34 @@ public class TestBufferedIOFlush {
         }
 //        pw.close();
         System.out.println("finished...");
+    }
+
+    @Test
+    public void testLineReader() throws Exception {
+        String location = "C:\\Users\\zhaopei\\Desktop\\33cvs.txt";
+        File file = new File(location);
+        FileReader fileReader = new FileReader(file);
+        LineNumberReader lineNumberReader = new LineNumberReader(fileReader);
+        lineNumberReader.setLineNumber(2);
+        System.out.println(lineNumberReader.readLine());
+        System.out.println(lineNumberReader.getLineNumber());
+    }
+
+    @Test
+    public void TestFileWrite() throws Exception {
+        File file = new File("C:\\Users\\zhaopei\\Desktop\\aa.txt");
+        for (int i = 0; i < 10; i++) {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write("dddbbbb" + i);
+            fileWriter.flush();
+            fileWriter.close();
+            File newFile = new File("C:\\Users\\zhaopei\\Desktop\\bb" + i + ".txt");
+            System.out.println(file.renameTo(newFile));
+            if (i == 2) {
+                System.out.println("删除第二个文件" + newFile.delete());
+            }
+        }
+
+        //  System.out.println("delete file ......"+newFile.delete());
     }
 }
