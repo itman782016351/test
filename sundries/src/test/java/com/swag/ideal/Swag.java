@@ -22,7 +22,7 @@ public class Swag {
     @Test
     public void insert() throws SQLException {
         Connection conn = getConnection();
-        String sql = "SELECT appid FROM swag ";
+        String sql = "select to_char(sysdate,'yyyy-MM-dd HH24:mi:ss') from dual";
         PreparedStatement pst = null;
         //String sql = "insert into b values(?)";
         pst = conn.prepareStatement(sql);
@@ -85,7 +85,7 @@ public class Swag {
             File f = files[i];
             System.out.println(f);
         }
-        File sourcexsl = new File("C:\\Users\\zhaopei\\Desktop\\aa.xlsx");
+        File sourcexsl = new File("C:\\Users\\zhaopei\\Desktop\\cc.xlsx");
         Workbook wb = new XSSFWorkbook(new FileInputStream(sourcexsl));
         //shelet1;
         Sheet s1 = wb.getSheetAt(0);
@@ -149,8 +149,8 @@ public class Swag {
     public Connection getConnection() {
         Connection conn = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            conn = DriverManager.getConnection("jdbc:mysql://10.145.205.55:3306/test", "esbadmin", "esbroot");
+            Class.forName("oracle.jdbc.driver.OracleDriver").newInstance();
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:orcl", "scott", "tiger");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -216,7 +216,9 @@ public class Swag {
 
     public void writeBody(PrintWriter pw, String httpmethod, String methoddesc) {
         pw.println("    " + httpmethod + ":");
-        pw.println("      summary: " + methoddesc);
+        if (StringUtils.isNotEmpty(methoddesc)) {
+            pw.println("      summary: " + methoddesc);
+        }
         pw.println("      parameters:");
         pw.println("        - name: lanId");
         pw.println("          in: query");

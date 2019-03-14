@@ -30,10 +30,11 @@ public class ThreadTest1 {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     System.out.println("InterruptedException");
-                    Thread.currentThread().interrupt();
+//                    Thread.currentThread().interrupt();
                 }
             }
             System.out.println("interrupt执行后" + System.currentTimeMillis());
         }
     }
+
 }
