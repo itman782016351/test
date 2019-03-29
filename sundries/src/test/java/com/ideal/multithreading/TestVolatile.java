@@ -9,7 +9,6 @@ import java.util.Set;
 public class TestVolatile extends Thread {
     //    private boolean isRunning = true;
     private volatile boolean isRunning = true;
-    ;
 
     @Override
     public void run() {
