@@ -12,6 +12,7 @@
         <module>testlog4j2</module>
         <module>sundries</module>
         <module>testjbpm</module>
+        <module>testCharsetEncoding</module>
     </modules>
 
 <dependencies>
