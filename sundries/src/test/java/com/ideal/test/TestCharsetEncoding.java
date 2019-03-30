@@ -19,8 +19,8 @@ GBK保存时候，文件本身占用的字节数不一样。GBK字符集中一个中文占2个
 标字符集编码，字符内容不变，但是文件本身保存的字节会改变。
 5、jvm读取文本文件的时候，是读取文件本身的字节，并用自身jvm的编码解
 码读取到的字节。所以当文件编码和jvm的编码不一致，就是解码乱码。
-6、String的getBytes("字符集")方法是用指定的字符集解码字符，new String(Byt
-e[], ""字符集"))是用指定的字符集编码形成字符。
+6、String的getBytes("字符集")方法是用指定的字符集编码字符得到编码字符，
+new String(Byte[], ""字符集"))是用指定的字符集解码形成字符。
  */
 public class TestCharsetEncoding {
     public static void main(String[] args) throws Exception {
