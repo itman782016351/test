@@ -8,19 +8,20 @@ import org.junit.Test;
  */
 public class TestInnerClass {
 
+
     @Test
     public void test1() {
         String var1 = "invoke innerClass";
         test2(new InnerInterface() {
             @Override
-            public String method1() {
-//                return va1 + "haha";
-                return null;
+            public String method1(String var2) {
+                System.out.println(var1 + "inner..." + var2);
+                return var1 + "haha";
             }
         });
     }
 
     String test2(InnerInterface innerInterface) {
-        return innerInterface.method1();
+        return innerInterface.method1("11");
     }
 }

@@ -5,5 +5,5 @@ package com.ideal.innerClassTest;
  * @create 2019-04-10 11:40
  */
 public interface InnerInterface {
-    public String method1();
+    public String method1(String var1);
 }
