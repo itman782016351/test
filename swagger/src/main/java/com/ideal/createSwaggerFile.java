@@ -1,28 +1,31 @@
-package com.swag.ideal;
+package com.ideal;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.PrintWriter;
 import java.sql.*;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 /**
  * @author zhaopei
- * @create 2019-03-08 19:26
+ * @create 2019-06-05 11:00
  */
-public class Swag {
+public class createSwaggerFile {
+    public static void main(String[] args) throws Exception {
+        insert();
+        read();
+        writeFile();
+    }
 
 
-    @Test
-    public void insert() throws SQLException {
+    public static void insert() throws SQLException {
         Connection conn = getConnection();
-        String sql = "select to_char(sysdate,'yyyy-MM-dd HH24:mi:ss') from dual";
+        String sql = "SELECT 1 FROM DUAL";
         PreparedStatement pst = null;
         //String sql = "insert into b values(?)";
         pst = conn.prepareStatement(sql);
@@ -30,17 +33,22 @@ public class Swag {
         while (rs.next()) {
             System.out.println(rs.getString(1));
         }
+        sql = "TRUNCATE table  api";
+        pst = conn.prepareStatement(sql);
+        rs = pst.executeQuery();
+        sql = "TRUNCATE table  apiurl";
+        pst = conn.prepareStatement(sql);
+        rs = pst.executeQuery();
 
     }
 
-    @Test
-    public void writeFile() throws Exception {
+    public static void writeFile() throws Exception {
         Connection conn = getConnection();
         String sql = "SELECT  * FROM api";
         PreparedStatement pst = null;
         pst = conn.prepareStatement(sql);
         ResultSet rs = pst.executeQuery();
-        String dir = "C:\\Users\\zhaopei\\Desktop\\swagyamls\\";
+        String dir = "/crm/swagyamls/";
         PrintWriter pw = null;
         while (rs.next()) {
             String apiid = rs.getString(1);
@@ -76,16 +84,15 @@ public class Swag {
     }
 
 
-    @Test
-    public void read() throws Exception {
-        String dir = "C:\\Users\\zhaopei\\Desktop\\";
+    public static void read() throws Exception {
+        String dir = "/crm";
         File dirFile = new File(dir);
         File[] files = dirFile.listFiles();
         for (int i = 0; i < files.length; i++) {
             File f = files[i];
             System.out.println(f);
         }
-        File sourcexsl = new File("C:\\Users\\zhaopei\\Desktop\\cc.xlsx");
+        File sourcexsl = new File("/crm/swagger.xlsx");
         Workbook wb = new XSSFWorkbook(new FileInputStream(sourcexsl));
         //shelet1;
         Sheet s1 = wb.getSheetAt(0);
@@ -147,7 +154,7 @@ public class Swag {
 
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         Connection conn = null;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -160,7 +167,7 @@ public class Swag {
 
     }
 
-    public void writeHead(PrintWriter pw, String apidesc) {
+    public static void writeHead(PrintWriter pw, String apidesc) {
         pw.println("swagger: '2.0'");
         pw.println("info:");
         pw.println("  description: " + apidesc);
@@ -177,7 +184,7 @@ public class Swag {
         pw.println("paths:");
     }
 
-    public void writeTail(PrintWriter pw) {
+    public static void writeTail(PrintWriter pw) {
         pw.println("definitions:");
         pw.println("  FuncationalProductsDTO:");
         pw.println("    type: object");
@@ -215,7 +222,7 @@ public class Swag {
         pw.println("    description: 功能产品");
     }
 
-    public void writeBody(PrintWriter pw, String httpmethod, String methoddesc) {
+    public static void writeBody(PrintWriter pw, String httpmethod, String methoddesc) {
         pw.println("    " + httpmethod + ":");
         if (StringUtils.isNotEmpty(methoddesc)) {
             pw.println("      summary: " + methoddesc);
@@ -233,5 +240,4 @@ public class Swag {
         pw.println("            $ref: '#/definitions/FuncationalProductsDTO'");
         pw.println();
     }
-
 }

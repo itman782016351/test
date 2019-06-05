@@ -13,6 +13,8 @@
         <module>sundries</module>
         <module>testjbpm</module>
         <module>testHystrix</module>
+        <module>testJetty</module>
+        <module>swagger</module>
     </modules>
 
 <dependencies>
