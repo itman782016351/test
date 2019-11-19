@@ -27,7 +27,7 @@ public class HelloCommand extends HystrixCommand<String> {
     @Override
     protected String run() throws Exception {
         //模拟请求外部接口需要的时间长度
-        Thread.sleep(2000);
+        Thread.sleep(100);
         return "sucess";
     }
 
